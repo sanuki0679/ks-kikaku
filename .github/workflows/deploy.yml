@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
 
       - name: Install dependencies
@@ -30,14 +30,18 @@ jobs:
       - name: Build static site
         run: npm run build:sakura
 
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
       - name: Deploy to Sakura FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
-          protocol: ftp
-          local-dir: ./out/
-          server-dir: ks-kikaku/
-          dangerous-clean-slate: false
+        run: |
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}" <<EOF
+          set ftp:passive-mode yes
+          set ftp:ssl-allow no
+          set ssl:verify-certificate no
+          set net:max-retries 3
+          set net:reconnect-interval-base 5
+          cd www
+          mirror --reverse --delete --verbose --parallel=1 ./out/ ks-kikaku/
+          quit
+          EOF
