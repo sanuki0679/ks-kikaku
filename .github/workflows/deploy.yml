@@ -30,18 +30,13 @@ jobs:
       - name: Build static site
         run: npm run build:sakura
 
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
-
-      - name: Deploy to Sakura FTP
-        run: |
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}" <<EOF
-          set ftp:passive-mode yes
-          set ftp:ssl-allow no
-          set ssl:verify-certificate no
-          set net:max-retries 3
-          set net:reconnect-interval-base 5
-          cd www
-          mirror --reverse --delete --verbose --parallel=1 ./out/ ks-kikaku/
-          quit
-          EOF
+      - name: Deploy via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SAKURA_HOST }}
+          username: ${{ secrets.SAKURA_USER }}
+          key: ${{ secrets.SAKURA_KEY }}
+          source: "out/*"
+          target: ${{ secrets.SAKURA_TARGET_DIR }}/ks-kikaku
+          strip_components: 1
+          rm: true
