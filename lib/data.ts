@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "KS企画",
   tagline: "現場の困りごとを、わかりやすいWebアプリで解決します",
-  email: "contact@example.com",
+  email: "sanuki0679@gmail.com",
   description:
     "飲食店・介護施設向けの業務改善Webアプリを開発しています。予約管理、シフト管理、送迎記録など、現場の紙や電話に頼っていた作業をデジタル化します。",
 };
@@ -42,51 +42,63 @@ export const services = [
   },
 ];
 
-export const works = [
+export type Work = {
+  id: "reservation" | "shift" | "transport";
+  title: string;
+  category: string;
+  summary: string;
+  challenge: string;
+  outcome: string;
+  features: string[];
+  status?: "運用中" | "開発中" | "試作";
+  screenshot?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    caption: string;
+  };
+};
+
+export const works: Work[] = [
   {
+    id: "reservation",
     title: "和さぶろ 予約管理アプリ",
     category: "飲食店",
-    summary: "電話・Web・LINEの予約を一元管理し、座席割当やキャンセル対応をスムーズに。",
+    summary: "いろいろな窓口から入る予約を、ひとつの画面に。",
+    challenge: "電話・Web・LINEに分かれた予約をまとめて把握し、座席の割当や変更に対応したい。",
+    outcome: "予約一覧から受付内容を確認し、座席の割当やキャンセルを管理できます。",
     features: [
-      "電話予約・Web予約・LINE予約の一元管理",
-      "座席割当、予約一覧、キャンセル管理",
-      "予約ミスや紙管理の削減",
+      "電話・Web・LINE予約の一元管理",
+      "予約一覧と座席の割当",
+      "キャンセルの管理",
     ],
-    purpose: "飲食店の予約業務を整理し、スタッフの負担を減らす",
   },
   {
+    id: "shift",
     title: "シフト管理アプリ",
     category: "飲食店・介護施設",
-    summary: "スタッフの希望を集めて、店長が週単位でシフト表を作成できる仕組み。",
+    summary: "希望の提出から週ごとのシフト作成まで、ひとつにつなぐ。",
+    challenge: "紙やLINEで届く希望シフト・希望休を集めて、シフト表にまとめる手間を減らしたい。",
+    outcome: "スタッフがWebから希望を登録し、管理者が週単位のシフト表を作成できます。",
     features: [
       "スタッフが希望シフト・希望休を登録",
       "店長が週単位でシフト表を作成",
       "QRコード付きログインカードの発行",
     ],
-    purpose: "紙やLINEでのシフト調整を、見やすいWeb画面に集約",
   },
   {
+    id: "transport",
     title: "デイサービス 送迎記録アプリ",
     category: "介護施設",
-    summary: "送迎の出発・到着をボタンで記録し、紙の運行記録をデジタル化。",
+    summary: "送迎の出発・到着を、その場でスマホに記録。",
+    challenge: "紙の運行記録をデジタル化し、送迎時の記録漏れを防ぎたい。",
+    outcome: "出発・到着をボタンで記録。車両の運行やアルコールチェックの記録もWebで管理できます。",
     features: [
       "出発・到着をボタンで記録",
       "GPS打刻、車両運行記録",
       "アルコールチェックの記録",
     ],
-    purpose: "紙の運行記録をデジタル化し、記録漏れを防ぐ",
-  },
-  {
-    title: "LINE連携・AI活用",
-    category: "飲食店・介護施設",
-    summary: "LINE公式アカウントを活用した予約受付や案内、将来のAI活用も視野に。",
-    features: [
-      "LINE公式アカウントの構築・運用",
-      "LINEでの予約受付",
-      "QRコードによる案内",
-      "AI電話受付・OCRへの対応（予定）",
-    ],
-    purpose: "お客様とのやりとりを自動化し、スタッフの手間を減らす",
   },
 ];
 

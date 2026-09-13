@@ -50,6 +50,9 @@ export default function Services() {
             </article>
           ))}
         </div>
+        <p className="mt-6 text-center text-sm leading-relaxed text-gray-600">
+          今後の対応予定：AI電話受付・OCR（画像からの文字読み取り）
+        </p>
       </div>
     </section>
   );
