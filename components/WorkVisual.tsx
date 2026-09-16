@@ -49,7 +49,7 @@ function FeatureDiagram({ kind }: { kind: Work["id"] }) {
               <span key={index} className={`h-7 rounded ${[2, 5, 7, 11, 16, 20].includes(index) ? "border border-navy-100 bg-white" : "bg-navy-200"}`} />
             ))}
           </div>
-          <p className="mt-4 text-sm text-gray-600">集まった希望を、見やすい一覧に。</p>
+          <p className="mt-4 text-sm text-navy-600">集まった希望を、見やすい一覧に。</p>
         </div>
       </div>
     );
@@ -66,7 +66,7 @@ function FeatureDiagram({ kind }: { kind: Work["id"] }) {
           </div>
         ))}
       </div>
-      <div className="mt-5 space-y-2 border-t border-gray-100 pt-4 text-sm text-gray-600">
+      <div className="mt-5 space-y-2 border-t border-navy-100 pt-4 text-sm text-navy-600">
         <p>GPS・車両運行記録</p>
         <p>アルコールチェック</p>
       </div>
@@ -79,7 +79,7 @@ export default function WorkVisual({ work }: { work: Work }) {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
   return (
-    <figure className="flex min-w-0 flex-col justify-center border-b border-gray-200 bg-navy-50 px-5 py-8 sm:px-8 lg:border-r lg:border-b-0 lg:py-10">
+    <figure className="flex min-w-0 flex-col justify-center bg-gradient-to-br from-navy-50 via-white to-navy-100 px-5 py-9 sm:px-8 lg:h-full lg:py-12">
       {work.video ? (
         <video
           controls
@@ -89,7 +89,7 @@ export default function WorkVisual({ work }: { work: Work }) {
           preload="metadata"
           poster={work.video.poster ? `${basePath}${work.video.poster}` : undefined}
           aria-label={work.video.label}
-          className="aspect-video w-full rounded-lg border border-navy-100 bg-navy-900 object-contain shadow-sm"
+          className="aspect-video w-full rounded-2xl bg-navy-900 object-contain shadow-card ring-1 ring-navy-900/10"
         >
           <source src={`${basePath}${work.video.src}`} type={work.video.type} />
           お使いのブラウザーでは動画を再生できません。
@@ -101,12 +101,12 @@ export default function WorkVisual({ work }: { work: Work }) {
           width={work.screenshot.width}
           height={work.screenshot.height}
           sizes="(min-width: 1024px) 520px, 100vw"
-          className="h-auto w-full rounded-lg border border-navy-100 object-contain shadow-sm"
+          className="h-auto w-full rounded-2xl object-contain shadow-card ring-1 ring-navy-900/10"
         />
       ) : (
         <>
           <div className="text-center">
-            <p className="text-xl font-bold text-navy-900 sm:text-2xl">{copy.title}</p>
+            <p className="text-xl font-bold tracking-tight text-navy-900 sm:text-2xl">{copy.title}</p>
             <p className="mt-2 text-sm text-navy-600">{copy.subtitle}</p>
           </div>
           <div className="flex min-h-80 items-center justify-center py-6" role="img" aria-label={`${work.title}の機能説明図。${work.outcome}`}>

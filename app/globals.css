@@ -2,14 +2,24 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #1a2332;
-  --navy-50: #f0f4f8;
-  --navy-100: #d9e2ec;
+  --foreground: #16202e;
+  --navy-50: #f2f6fa;
+  --navy-100: #dbe6f0;
   --navy-200: #bcccdc;
+  --navy-300: #9fb3c8;
+  --navy-400: #7c95ae;
+  --navy-500: #5d7b96;
   --navy-600: #486581;
   --navy-700: #334e68;
   --navy-800: #243b53;
   --navy-900: #102a43;
+  --navy-950: #081a2b;
+  --gold-100: #fdf4de;
+  --gold-200: #f8e4b6;
+  --gold-300: #f0cf87;
+  --gold-400: #e3b45f;
+  --gold-500: #cf9a3c;
+  --gold-600: #a8792a;
 }
 
 @theme inline {
@@ -18,11 +28,25 @@
   --color-navy-50: var(--navy-50);
   --color-navy-100: var(--navy-100);
   --color-navy-200: var(--navy-200);
+  --color-navy-300: var(--navy-300);
+  --color-navy-400: var(--navy-400);
+  --color-navy-500: var(--navy-500);
   --color-navy-600: var(--navy-600);
   --color-navy-700: var(--navy-700);
   --color-navy-800: var(--navy-800);
   --color-navy-900: var(--navy-900);
+  --color-navy-950: var(--navy-950);
+  --color-gold-100: var(--gold-100);
+  --color-gold-200: var(--gold-200);
+  --color-gold-300: var(--gold-300);
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
   --font-sans: var(--font-noto-sans-jp);
+  /* 欧文の見出し・ラベルだけ Outfit を使い、和文は本文書体にフォールバックする */
+  --font-display: var(--font-outfit), var(--font-noto-sans-jp), sans-serif;
+  --shadow-card: 0 1px 2px rgb(16 42 67 / 0.04), 0 12px 32px -18px rgb(16 42 67 / 0.24);
+  --shadow-lift: 0 2px 4px rgb(16 42 67 / 0.05), 0 28px 48px -24px rgb(16 42 67 / 0.32);
 }
 
 html {
@@ -34,5 +58,100 @@ body {
   color: var(--foreground);
   font-family: var(--font-noto-sans-jp), "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.8;
+}
+
+/* グラデーション文字。background-clip 非対応の環境では単色で表示する */
+.text-gold-gradient {
+  color: var(--gold-300);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .text-gold-gradient {
+    background: linear-gradient(100deg, var(--gold-200), var(--gold-400) 55%, var(--gold-300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* ヒーローの背景装飾（細い格子とにじむ光） */
+.hero-decor::before,
+.hero-decor::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-decor::before {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(75% 60% at 50% 35%, #000 30%, transparent 100%);
+}
+
+.hero-decor::after {
+  background:
+    radial-gradient(48% 46% at 18% 12%, rgb(227 180 95 / 0.22), transparent 70%),
+    radial-gradient(52% 50% at 84% 78%, rgb(72 101 129 / 0.45), transparent 70%);
+}
+
+.section-tint {
+  background:
+    radial-gradient(60% 45% at 12% 0%, rgb(227 180 95 / 0.07), transparent 70%),
+    radial-gradient(55% 45% at 92% 100%, rgb(16 42 67 / 0.06), transparent 70%),
+    var(--navy-50);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-in > * {
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-in > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.hero-in > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.hero-in > *:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.hero-in > *:nth-child(5) {
+  animation-delay: 0.32s;
+}
+
+/* スクロール連動の対応ブラウザーだけ、表示に合わせてふわりと出す */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise-in 1s linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 26%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-in > *,
+  .reveal {
+    animation: none;
+  }
 }

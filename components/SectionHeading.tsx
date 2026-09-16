@@ -10,13 +10,17 @@ export default function SectionHeading({
   description,
 }: SectionHeadingProps) {
   return (
-    <div className="mb-10 text-center md:mb-14">
-      <p className="mb-2 text-sm font-semibold tracking-widest text-navy-600 uppercase">
+    <div className="reveal mb-12 text-center md:mb-16">
+      <p className="font-display inline-flex items-center gap-3 text-xs font-semibold tracking-[0.28em] text-gold-600 uppercase">
+        <span aria-hidden="true" className="h-px w-8 bg-gold-400" />
         {label}
+        <span aria-hidden="true" className="h-px w-8 bg-gold-400" />
       </p>
-      <h2 className="text-2xl font-bold text-navy-900 md:text-3xl">{title}</h2>
+      <h2 className="mt-4 text-3xl font-bold tracking-tight text-navy-900 md:text-4xl">
+        {title}
+      </h2>
       {description && (
-        <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-navy-600 md:text-lg">
           {description}
         </p>
       )}

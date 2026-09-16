@@ -4,18 +4,28 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-gray-200 bg-navy-900 text-white">
-      <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
-        <div className="flex flex-col gap-8 md:flex-row md:justify-between">
+    <footer className="relative bg-navy-950 text-white">
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-400/60 to-transparent"
+      />
+      <div className="mx-auto max-w-6xl px-4 py-14 md:px-6">
+        <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           <div>
-            <p className="text-xl font-bold">{siteConfig.name}</p>
-            <p className="mt-2 max-w-sm text-sm leading-relaxed text-navy-200">
+            <p className="font-display text-xl font-bold tracking-tight">{siteConfig.name}</p>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-navy-200">
               {siteConfig.tagline}
             </p>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="mt-4 inline-block text-sm font-medium text-gold-300 underline-offset-4 transition-colors hover:text-gold-200 hover:underline"
+            >
+              {siteConfig.email}
+            </a>
           </div>
 
           <nav>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            <ul className="flex flex-wrap gap-x-6 gap-y-3">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <a
@@ -30,7 +40,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-10 border-t border-navy-700 pt-6 text-center text-sm text-navy-300">
+        <div className="mt-12 border-t border-white/10 pt-6 text-center text-sm text-navy-300">
           <p>
             &copy; {currentYear} {siteConfig.name}. All rights reserved.
           </p>

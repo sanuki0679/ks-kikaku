@@ -26,7 +26,7 @@ const icons: Record<string, React.ReactNode> = {
 
 export default function Services() {
   return (
-    <section id="services" className="bg-white py-16 md:py-24">
+    <section id="services" className="scroll-mt-24 bg-white py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
           label="Services"
@@ -38,19 +38,23 @@ export default function Services() {
           {services.map((service) => (
             <article
               key={service.title}
-              className="rounded-2xl border border-gray-200 bg-gray-50 p-6 md:p-8"
+              className="reveal group relative overflow-hidden rounded-3xl border border-navy-100 bg-white p-7 shadow-card transition duration-300 hover:-translate-y-1 hover:border-navy-200 hover:shadow-lift md:p-9"
             >
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-navy-800 text-white">
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-300 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              />
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-navy-800 to-navy-950 text-gold-300 ring-1 ring-navy-900/10">
                 {icons[service.icon]}
               </div>
               <h3 className="text-xl font-bold text-navy-900">{service.title}</h3>
-              <p className="mt-3 text-base leading-relaxed text-gray-600">
+              <p className="mt-3 text-base leading-relaxed text-navy-600">
                 {service.description}
               </p>
             </article>
           ))}
         </div>
-        <p className="mt-6 text-center text-sm leading-relaxed text-gray-600">
+        <p className="reveal mt-8 text-center text-sm leading-relaxed text-navy-500">
           今後の対応予定：AI電話受付・OCR（画像からの文字読み取り）
         </p>
       </div>
