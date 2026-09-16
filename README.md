@@ -29,6 +29,22 @@ screenshot: {
 
 画像は縦横比を保って表示され、さくら公開用の `/ks-kikaku` パスにも対応します。確認できていない導入効果や利用者の声は掲載しません。
 
+操作デモ動画を載せる場合は、動画とポスター画像（再生前に表示する静止画）を `public/works/` に保存し、対象の実績に `video` を追加します。`video` があるときは、スクリーンショットや説明図より優先して表示します。
+
+```ts
+video: {
+  src: "/works/reservation-demo.webm",
+  type: "video/webm",
+  poster: "/works/reservation-demo-poster.webp",
+  label: "予約の登録から空席の確認、座席の割当までを操作するデモ動画（音声なし）",
+  caption: "操作デモ動画・約1分（架空のサンプルデータ／音声なし）",
+},
+```
+
+動画は自動再生せず、再生ボタンを押したときだけ再生します（`preload="metadata"` のため、表示時は動画本体を読み込みません）。掲載する動画には架空のサンプルデータのみを映し、個人情報は含めません。
+
+WebM（VP9）は Chrome・Edge・Firefox と、Safari 14.1 以降（macOS）・iOS 17.4 以降で再生できます。古い iPhone にも対応する場合は、同じ内容の MP4（H.264）を `public/works/` に置き、`<source>` を追加してください。
+
 ## さくらレンタルサーバへ公開
 
 レンタルサーバでは Node.js が動かないため、静的ファイル（HTML/CSS/JS）として公開します。

@@ -76,10 +76,25 @@ function FeatureDiagram({ kind }: { kind: Work["id"] }) {
 
 export default function WorkVisual({ work }: { work: Work }) {
   const copy = visualCopy[work.id];
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
   return (
     <figure className="flex min-w-0 flex-col justify-center border-b border-gray-200 bg-navy-50 px-5 py-8 sm:px-8 lg:border-r lg:border-b-0 lg:py-10">
-      {work.screenshot ? (
+      {work.video ? (
+        <video
+          controls
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={work.video.poster ? `${basePath}${work.video.poster}` : undefined}
+          aria-label={work.video.label}
+          className="aspect-video w-full rounded-lg border border-navy-100 bg-navy-900 object-contain shadow-sm"
+        >
+          <source src={`${basePath}${work.video.src}`} type={work.video.type} />
+          お使いのブラウザーでは動画を再生できません。
+        </video>
+      ) : work.screenshot ? (
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${work.screenshot.src}`}
           alt={work.screenshot.alt}
@@ -102,7 +117,7 @@ export default function WorkVisual({ work }: { work: Work }) {
         </>
       )}
       <figcaption className="mt-4 text-center text-sm text-navy-600">
-        {work.screenshot?.caption ?? "機能のイメージ（実際の画面ではありません）"}
+        {work.video?.caption ?? work.screenshot?.caption ?? "機能のイメージ（実際の画面ではありません）"}
       </figcaption>
     </figure>
   );

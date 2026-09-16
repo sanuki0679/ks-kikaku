@@ -58,6 +58,13 @@ export type Work = {
     height: number;
     caption: string;
   };
+  video?: {
+    src: string;
+    type: string;
+    poster?: string;
+    label: string;
+    caption: string;
+  };
 };
 
 export const works: Work[] = [
@@ -73,6 +80,13 @@ export const works: Work[] = [
       "予約一覧と座席の割当",
       "キャンセルの管理",
     ],
+    video: {
+      src: "/works/reservation-demo.webm",
+      type: "video/webm",
+      poster: "/works/reservation-demo-poster.webp",
+      label: "予約の登録から空席の確認、座席の割当までを操作するデモ動画（音声なし）",
+      caption: "操作デモ動画・約1分（架空のサンプルデータ／音声なし）",
+    },
   },
   {
     id: "shift",
