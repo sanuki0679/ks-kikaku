@@ -65,6 +65,8 @@ export type WorkVideo = {
   tab: string;
   src: string;
   type: string;
+  width: number;
+  height: number;
   poster?: string;
   label: string;
   caption: string;
@@ -88,6 +90,8 @@ export const works: Work[] = [
         tab: "店舗側の操作",
         src: "/works/reservation-demo.webm",
         type: "video/webm",
+        width: 1280,
+        height: 720,
         poster: "/works/reservation-demo-poster.webp",
         label: "予約の登録から空席の確認、座席の割当までを操作するデモ動画（音声なし）",
         caption: "店舗側の操作デモ・約1分（架空のサンプルデータ／音声なし）",
@@ -96,6 +100,8 @@ export const works: Work[] = [
         tab: "お客様のWeb予約",
         src: "/works/reservation-guide.mp4",
         type: "video/mp4",
+        width: 1920,
+        height: 1080,
         poster: "/works/reservation-guide-poster.jpg",
         label:
           "お客様がWebから日付・時間・人数・連絡先を入力して予約し、あとから予約内容を確認するまでの操作ガイド（音声なし）",
@@ -114,6 +120,19 @@ export const works: Work[] = [
       "スタッフが希望シフト・希望休を登録",
       "店長が週単位でシフト表を作成",
       "QRコード付きログインカードの発行",
+    ],
+    videos: [
+      {
+        tab: "シフト登録の操作",
+        src: "/works/shift-demo.mp4",
+        type: "video/mp4",
+        width: 1920,
+        height: 1440,
+        poster: "/works/shift-demo-poster.jpg",
+        label:
+          "スタッフと時間を選んでシフトを3件登録し、週のシフト表に反映されるまでの操作を再現した動画（音声なし）",
+        caption: "シフト登録の操作実演・約1分（再現映像／スタッフ名はぼかしています）",
+      },
     ],
   },
   {

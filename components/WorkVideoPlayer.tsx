@@ -57,9 +57,11 @@ export default function WorkVideoPlayer({
           loop
           playsInline
           preload="metadata"
+          width={video.width}
+          height={video.height}
           poster={video.poster ? `${basePath}${video.poster}` : undefined}
           aria-label={video.label}
-          className="aspect-video w-full rounded-2xl bg-navy-900 object-contain shadow-card ring-1 ring-navy-900/10"
+          className="h-auto w-full rounded-2xl bg-navy-900 object-contain shadow-card ring-1 ring-navy-900/10"
         >
           <source src={`${basePath}${video.src}`} type={video.type} />
           お使いのブラウザーでは動画を再生できません。
