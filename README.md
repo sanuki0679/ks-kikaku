@@ -29,21 +29,24 @@ screenshot: {
 
 画像は縦横比を保って表示され、さくら公開用の `/ks-kikaku` パスにも対応します。確認できていない導入効果や利用者の声は掲載しません。
 
-操作デモ動画を載せる場合は、動画とポスター画像（再生前に表示する静止画）を `public/works/` に保存し、対象の実績に `video` を追加します。`video` があるときは、スクリーンショットや説明図より優先して表示します。
+操作デモ動画を載せる場合は、動画とポスター画像（再生前に表示する静止画）を `public/works/` に保存し、対象の実績に `videos` を追加します。`videos` があるときは、スクリーンショットや説明図より優先して表示します。複数入れると `tab` の名前で切り替えボタンが並び、1本だけのときは切り替えボタンを表示しません。
 
 ```ts
-video: {
-  src: "/works/reservation-demo.webm",
-  type: "video/webm",
-  poster: "/works/reservation-demo-poster.webp",
-  label: "予約の登録から空席の確認、座席の割当までを操作するデモ動画（音声なし）",
-  caption: "操作デモ動画・約1分（架空のサンプルデータ／音声なし）",
-},
+videos: [
+  {
+    tab: "店舗側の操作",
+    src: "/works/reservation-demo.webm",
+    type: "video/webm",
+    poster: "/works/reservation-demo-poster.webp",
+    label: "予約の登録から空席の確認、座席の割当までを操作するデモ動画（音声なし）",
+    caption: "店舗側の操作デモ・約1分（架空のサンプルデータ／音声なし）",
+  },
+],
 ```
 
-動画は自動再生せず、再生ボタンを押したときだけ再生します（`preload="metadata"` のため、表示時は動画本体を読み込みません）。掲載する動画には架空のサンプルデータのみを映し、個人情報は含めません。
+動画は自動再生せず、再生ボタンを押したときだけ再生します（`preload="metadata"` のため、表示時は動画本体を読み込みません）。掲載する動画には架空のサンプルデータのみを映し、個人情報は含めません。実在の名前が映っている場合は、その部分をぼかしてから掲載し、`caption` にぼかしている旨を書きます。
 
-WebM（VP9）は Chrome・Edge・Firefox と、Safari 14.1 以降（macOS）・iOS 17.4 以降で再生できます。古い iPhone にも対応する場合は、同じ内容の MP4（H.264）を `public/works/` に置き、`<source>` を追加してください。
+WebM（VP9）は Chrome・Edge・Firefox と、Safari 14.1 以降（macOS）・iOS 17.4 以降で再生できます。iPhone を含めてどの環境でも再生したい場合は MP4（H.264）で用意してください。
 
 ## さくらレンタルサーバへ公開
 

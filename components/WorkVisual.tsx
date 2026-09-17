@@ -1,4 +1,5 @@
 import Image from "next/image";
+import WorkVideoPlayer from "@/components/WorkVideoPlayer";
 import type { Work } from "@/lib/data";
 
 const visualCopy = {
@@ -80,20 +81,8 @@ export default function WorkVisual({ work }: { work: Work }) {
 
   return (
     <figure className="flex min-w-0 flex-col justify-center bg-gradient-to-br from-navy-50 via-white to-navy-100 px-5 py-9 sm:px-8 lg:h-full lg:py-12">
-      {work.video ? (
-        <video
-          controls
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={work.video.poster ? `${basePath}${work.video.poster}` : undefined}
-          aria-label={work.video.label}
-          className="aspect-video w-full rounded-2xl bg-navy-900 object-contain shadow-card ring-1 ring-navy-900/10"
-        >
-          <source src={`${basePath}${work.video.src}`} type={work.video.type} />
-          お使いのブラウザーでは動画を再生できません。
-        </video>
+      {work.videos?.length ? (
+        <WorkVideoPlayer videos={work.videos} basePath={basePath} />
       ) : work.screenshot ? (
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${work.screenshot.src}`}
@@ -116,9 +105,11 @@ export default function WorkVisual({ work }: { work: Work }) {
           </div>
         </>
       )}
-      <figcaption className="mt-4 text-center text-sm text-navy-600">
-        {work.video?.caption ?? work.screenshot?.caption ?? "機能のイメージ（実際の画面ではありません）"}
-      </figcaption>
+      {!work.videos?.length && (
+        <figcaption className="mt-4 text-center text-sm text-navy-600">
+          {work.screenshot?.caption ?? "機能のイメージ（実際の画面ではありません）"}
+        </figcaption>
+      )}
     </figure>
   );
 }

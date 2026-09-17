@@ -58,13 +58,16 @@ export type Work = {
     height: number;
     caption: string;
   };
-  video?: {
-    src: string;
-    type: string;
-    poster?: string;
-    label: string;
-    caption: string;
-  };
+  videos?: WorkVideo[];
+};
+
+export type WorkVideo = {
+  tab: string;
+  src: string;
+  type: string;
+  poster?: string;
+  label: string;
+  caption: string;
 };
 
 export const works: Work[] = [
@@ -80,13 +83,25 @@ export const works: Work[] = [
       "予約一覧と座席の割当",
       "キャンセルの管理",
     ],
-    video: {
-      src: "/works/reservation-demo.webm",
-      type: "video/webm",
-      poster: "/works/reservation-demo-poster.webp",
-      label: "予約の登録から空席の確認、座席の割当までを操作するデモ動画（音声なし）",
-      caption: "操作デモ動画・約1分（架空のサンプルデータ／音声なし）",
-    },
+    videos: [
+      {
+        tab: "店舗側の操作",
+        src: "/works/reservation-demo.webm",
+        type: "video/webm",
+        poster: "/works/reservation-demo-poster.webp",
+        label: "予約の登録から空席の確認、座席の割当までを操作するデモ動画（音声なし）",
+        caption: "店舗側の操作デモ・約1分（架空のサンプルデータ／音声なし）",
+      },
+      {
+        tab: "お客様のWeb予約",
+        src: "/works/reservation-guide.mp4",
+        type: "video/mp4",
+        poster: "/works/reservation-guide-poster.jpg",
+        label:
+          "お客様がWebから日付・時間・人数・連絡先を入力して予約し、あとから予約内容を確認するまでの操作ガイド（音声なし）",
+        caption: "お客様のWeb予約ガイド・約1分（架空のサンプルデータ／お名前はぼかしています）",
+      },
+    ],
   },
   {
     id: "shift",
